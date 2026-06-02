@@ -313,6 +313,12 @@ Manual `workflow_dispatch` rebuilds the image but skips the GitHub Release step 
 
 ---
 
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). In short: standard library only, Python 3.12+, keep both READMEs in sync, and run `just validate` and `just test` before opening a PR.
+
+---
+
 ## License
 
 MIT. See `LICENSE`.

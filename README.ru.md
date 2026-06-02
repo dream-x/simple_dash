@@ -313,6 +313,12 @@ git push origin v0.1.0
 
 ---
 
+## Участие
+
+Вклад приветствуется — см. [CONTRIBUTING.ru.md](CONTRIBUTING.ru.md). Коротко: только стандартная библиотека, Python 3.12+, держите оба README синхронными и запускайте `just validate` и `just test` перед открытием PR.
+
+---
+
 ## Лицензия
 
 MIT. См. `LICENSE`.
