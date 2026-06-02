@@ -419,6 +419,13 @@ class TestBuildConfigFromDict(unittest.TestCase):
 
 
 class TestRunWatchBackoff(unittest.TestCase):
+    def setUp(self):
+        # Isolate the run_watch state file (output + ".state.json") to a temp
+        # dir so the suite never writes into the working directory.
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.out = str(Path(self.tmp.name) / "x.html")
+
     def test_interval_doubles_on_failure_and_resets(self):
         sleeps: list[int] = []
         call = {"n": 0}
@@ -445,7 +452,7 @@ class TestRunWatchBackoff(unittest.TestCase):
             if len(sleeps) >= 5:
                 raise StopIteration
 
-        args = mock.Mock(output="x.html", watch_interval=10)
+        args = mock.Mock(output=self.out, watch_interval=10)
         with mock.patch.object(gd, "scan_dashboard", fake_scan), \
              mock.patch.object(gd, "dashboard_signature", fake_signature), \
              mock.patch.object(gd, "write_outputs", fake_write_outputs), \
@@ -469,7 +476,7 @@ class TestRunWatchBackoff(unittest.TestCase):
             if len(sleeps) >= 6:
                 raise StopIteration
 
-        args = mock.Mock(output="x.html", watch_interval=10)
+        args = mock.Mock(output=self.out, watch_interval=10)
         with mock.patch.object(gd, "scan_dashboard", fake_scan), \
              mock.patch.object(gd.time, "sleep", fake_sleep):
             with self.assertRaises(StopIteration):
