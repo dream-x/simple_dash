@@ -1,0 +1,55 @@
+{
+  "subnets": [
+    "192.168.1.0/24"
+  ],
+  "groups": [
+    {"name": "Infrastructure", "icon": "🖧"},
+    {"name": "Web", "icon": "🌐"},
+    {"name": "Apps", "icon": "▣"},
+    {"name": "Smart Home", "icon": "🏠"},
+    {"name": "Monitoring", "icon": "📈"},
+    {"name": "Cloud", "icon": "☁"}
+  ],
+  "services": [
+    {"port": 22, "name": "SSH", "icon": "⌁", "group": "Infrastructure"},
+    {"port": 80, "name": "HTTP", "protocol": "http", "icon": "🌐", "group": "Web", "favicon": true},
+    {"port": 443, "name": "HTTPS", "protocol": "https", "icon": "🔒", "group": "Web", "favicon": true},
+    {"port": 3000, "name": "Dev", "protocol": "http", "icon": "⚙", "group": "Apps", "favicon": true},
+    {"port": 5000, "name": "App", "protocol": "http", "icon": "▣", "group": "Apps", "favicon": true},
+    {"port": 8000, "name": "HTTP", "protocol": "http", "icon": "🌐", "group": "Web", "favicon": true},
+    {"port": 8080, "name": "HTTP", "protocol": "http", "icon": "🌐", "group": "Web", "favicon": true},
+    {"port": 8123, "name": "Home Assistant", "protocol": "http", "icon": "🏠", "group": "Smart Home", "tags": ["home"], "favicon": true},
+    {"port": 8443, "name": "HTTPS", "protocol": "https", "icon": "🔒", "group": "Web", "favicon": true},
+    {"port": 9000, "name": "App", "protocol": "http", "icon": "▣", "group": "Apps", "favicon": true},
+    {"port": 9090, "name": "Metrics", "protocol": "http", "icon": "📈", "group": "Monitoring", "tags": ["metrics"], "favicon": true}
+  ],
+  "manual_services": [
+    {
+      "name": "Router",
+      "url": "http://192.168.1.1",
+      "group": "Infrastructure",
+      "icon": "📡",
+      "tags": ["router", "network"],
+      "favicon": true
+    }
+  ],
+  "duplicates": [],
+  "bookmarks": [
+    {
+      "group": "Cloud",
+      "items": [
+        {"name": "GitHub", "url": "https://github.com", "icon": ""},
+        {"name": "Cloudflare", "url": "https://dash.cloudflare.com", "icon": "☁"}
+      ]
+    }
+  ],
+  "hosts": {
+    "192.168.1.1": {
+      "name": "Router",
+      "services": [
+        {"port": 80, "name": "Router UI", "protocol": "http", "icon": "📡", "group": "Infrastructure", "favicon": true},
+        {"port": 443, "name": "Router HTTPS", "protocol": "https", "icon": "📡", "group": "Infrastructure", "favicon": true}
+      ]
+    }
+  }
+}

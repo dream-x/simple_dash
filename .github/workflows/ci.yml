@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Python and JSON
+        run: |
+          python -m py_compile generate_dashboard.py serve_dashboard.py
+          python -m json.tool dashboard_config.json >/dev/null
+          python -m json.tool ports_catalog.json >/dev/null
+
+      - name: Run unit tests
+        run: python -m unittest discover tests -v

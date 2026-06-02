@@ -1,0 +1,27 @@
+services:
+  simple-dash:
+    build: .
+    container_name: ${APP:-simple-dash}
+    restart: unless-stopped
+    environment:
+      # Several subnets can be passed comma-separated. Empty means /data/dashboard_config.json is used.
+      SUBNETS: ${SUBNETS:-192.168.1.0/24}
+      SCAN_INTERVAL: ${SCAN_INTERVAL:-60}
+      PORT: ${PORT:-8080}
+      DISCOVER_PORTS: ${DISCOVER_PORTS:-common}
+      PORTS: ${PORTS:-}
+      HOST_DISCOVERY: ${HOST_DISCOVERY:-arp}
+      CONCURRENCY: ${CONCURRENCY:-64}
+      PORT_CONCURRENCY: ${PORT_CONCURRENCY:-512}
+      PORT_TIMEOUT: ${PORT_TIMEOUT:-0.35}
+      SERVICE_TIMEOUT: ${SERVICE_TIMEOUT:-1.2}
+      DNS_TIMEOUT: ${DNS_TIMEOUT:-0.5}
+      NETBIOS_TIMEOUT: ${NETBIOS_TIMEOUT:-0.45}
+      ARP_TIMEOUT: ${ARP_TIMEOUT:-0.4}
+      DISCOVERY_CONCURRENCY: ${DISCOVERY_CONCURRENCY:-128}
+      DISCOVERY_TIMEOUT: ${DISCOVERY_TIMEOUT:-0.6}
+      EXTRA_ARGS: ${EXTRA_ARGS:-}
+    ports:
+      - "${HTTP_PORT:-8080}:${PORT:-8080}"
+    volumes:
+      - ./data:/data
